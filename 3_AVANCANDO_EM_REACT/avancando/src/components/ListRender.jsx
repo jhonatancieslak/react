@@ -9,22 +9,30 @@ const ListRender = () => {
         "Almoxarifado Expedição"
     ]);
 
-    const [users] = useState([
+    const [users, setUsers] = useState([
         {id: 1, name: "Almoxarifado", number: 1 },
         {id: 2, name: "Almoxarifado", number: 2 },
         {id: 3, name: "Almoxarifado", number: 3 },
     ]);
 
+    const deleteRandom = () => {
+        const randomNumber = Math.floor(Math.random() * 3) + 1; // Generates 1, 2, or 3
+        
+        setUsers((prevUsers) => 
+            prevUsers.filter((user) => randomNumber !== user.id) 
+        );
+    }
+
     return (
         <div>
-            {/* Lista sem propriedades dinâmicas */}
+            {/* List without dynamic properties */}
             <ul>
                 {list.map((item, index) => (
                     <li key={index}>{item}</li>
                 ))}
             </ul>
 
-            {/* Lista com objetos e keys únicas */}
+            {/* List with objects and unique keys */}
             <ul>
                 {users.map((user) => (
                     <li key={user.id}>
@@ -32,6 +40,8 @@ const ListRender = () => {
                     </li>
                 ))}
             </ul>
+            {/* Previous state example */}
+            <button onClick={deleteRandom}>Delete random user</button>
         </div>
     );
 };
